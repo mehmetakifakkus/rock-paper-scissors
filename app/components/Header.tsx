@@ -6,7 +6,7 @@ import { useGameContext } from "../context/gameContext";
 type Props = {};
 
 export default function Header({}: Props) {
-  const { score } = useGameContext();
+  const { score, isLoading } = useGameContext();
 
   return (
     <div className="flex flex-row justify-between px-[18px] py-[14px] border-2 border-gray-500 w-[590px] h-[126px] rounded-xl">
@@ -22,7 +22,7 @@ export default function Header({}: Props) {
           SCORE
         </span>
         <span className="text-[52px] leading-[52px] font-barlow font-bold text-gray-600">
-          {score}
+          {isLoading ? "-" : score}
         </span>
       </div>
     </div>

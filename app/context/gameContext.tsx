@@ -1,52 +1,64 @@
 "use client";
 
-import { SetStateAction, createContext, useContext, useState } from "react";
+import {
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Type } from "../components/StyledIcon";
+import StringCrypto from "string-crypto";
 
 const GameContext = createContext({
   score: 0,
-  isCompleted: false,
+  step: 1,
+  userPicked: Type.null,
+  computerPicked: Type.null,
+  isLoading: true,
   incrementScore: () => {},
   decrementScore: () => {},
   resetScore: () => {},
-  markCompleted: () => {},
-  resetCompleted: () => {},
-  userPicked: Type.null,
-  computerPicked: Type.null,
   setUserPicked: (value: SetStateAction<Type>) => {},
   setComputerPicked: (value: SetStateAction<Type>) => {},
-  step: 1,
   setStep: (value: SetStateAction<number>) => {},
 });
+
+const { encryptString, decryptString } = new StringCrypto();
+const password = "password123Osm";
 
 // create a provider for score context
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [score, setScore] = useState(0);
-  const [isCompleted, setIsCompleted] = useState(false);
   const [userPicked, setUserPicked] = useState<Type>(Type.null);
   const [computerPicked, setComputerPicked] = useState<Type>(Type.null);
+  const [isLoading, setIsLoading] = useState(true);
   const [step, setStep] = useState(1);
 
+  useEffect(() => {
+    if (step === 4) {
+      let encryptedString = encryptString(score, password);
+      localStorage.setItem("score", encryptedString);
+    }
+    if (step === 1) {
+      const decryptedScore = localStorage.getItem("score");
+      const decryptedString =
+        decryptedScore === null ? "0" : decryptString(decryptedScore, password);
+      setScore(decryptedString ? parseInt(decryptedString) : 0);
+      setIsLoading(false);
+    }
+  }, [score, step]);
+
   const incrementScore = () => {
-    console.log("incrementing score");
     setScore((prevScore) => prevScore + 1);
   };
 
   const decrementScore = () => {
-    console.log("decrementing score");
     setScore((prevScore) => prevScore - 1);
   };
 
   const resetScore = () => {
     setScore(0);
-  };
-
-  const markCompleted = () => {
-    setIsCompleted(true);
-  };
-
-  const resetCompleted = () => {
-    setIsCompleted(false);
   };
 
   return (
@@ -56,15 +68,13 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         incrementScore,
         decrementScore,
         resetScore,
-        isCompleted,
-        markCompleted,
-        resetCompleted,
         userPicked,
         computerPicked,
         setUserPicked,
         setComputerPicked,
         step,
         setStep,
+        isLoading,
       }}
     >
       {children}

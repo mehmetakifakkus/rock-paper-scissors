@@ -23,6 +23,7 @@ export default function RulesPopup({ isModelOpen, setIsModelOpen }: Props) {
           onClick={() => {
             setIsModelOpen(false);
           }}
+          priority
         />
       </header>
       <Image

@@ -16,6 +16,7 @@ export default function Header({}: Props) {
         className="w-[142px] h-[90px] pt-[6px] pl-[6px]"
         width={142}
         height={90}
+        priority
       />
       <div className="w-[128px] p-3 flex flex-col items-center bg-white rounded-lg">
         <span className="text-sm font-barlow tracking-widest text-blue-700">

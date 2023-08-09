@@ -125,6 +125,7 @@ export default function StyledIcon({
             width={IMAGE_WIDTH}
             height={IMAGE_WIDTH}
             alt=""
+            priority
           />
         )}
       </section>

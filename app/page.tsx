@@ -2,6 +2,6 @@
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  useRouter().push("/step1");
+  useRouter().replace("/step1");
   return <></>;
 }

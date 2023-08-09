@@ -17,7 +17,7 @@ export default function Step3({}: Props) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push(`/step4?picked=${picked}&computer=${computer}`);
+      router.replace(`/step4?picked=${picked}&computer=${computer}`);
     }, 500);
     return () => clearTimeout(timer);
   }, [picked, computer, router]);

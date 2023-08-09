@@ -51,7 +51,7 @@ export default function Step3({}: Props) {
         </h1>
         <button
           onClick={() => {
-            router.push(`/step1`);
+            router.replace(`/step1`);
           }}
           className="text-gray-800 text-[16px] px-8 py-1 h-10 rounded-md bg-white leading-[8px] tracking-[2px] hover:text-rock-start"
         >

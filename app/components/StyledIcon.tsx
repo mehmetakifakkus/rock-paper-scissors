@@ -114,7 +114,7 @@ export default function StyledIcon({
         }
         onClick={() => {
           if (!selectable) return;
-          router.push(`/step2?picked=${type}`);
+          router.replace(`/step2?picked=${type}`);
         }}
         style={locationMap[location]}
       >

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
+import { useGameContext } from "../context/gameContext";
 
 const CONTAINER_WIDTH = 160;
 const IMAGE_WIDTH = 60;
@@ -89,7 +89,7 @@ export default function StyledIcon({
   selectable = false,
   state,
 }: Props) {
-  const router = useRouter();
+  const { setUserPicked, setStep } = useGameContext();
 
   return (
     <>
@@ -114,7 +114,8 @@ export default function StyledIcon({
         }
         onClick={() => {
           if (!selectable) return;
-          router.replace(`/step2?picked=${type}`);
+          setUserPicked(type);
+          setStep(2);
         }}
         style={locationMap[location]}
       >

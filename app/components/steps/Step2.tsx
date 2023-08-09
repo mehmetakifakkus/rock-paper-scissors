@@ -2,30 +2,27 @@
 
 import React, { useEffect } from "react";
 import StyledIcon, { Location, Type } from "../StyledIcon";
-import { useRouter, useSearchParams } from "next/navigation";
 import { generateComputerPick, pickedToType } from "./utils";
 import Header from "./Header";
+import { useGameContext } from "@/app/context/gameContext";
 
 type Props = {};
 
 export default function Step2({}: Props) {
-  const searchParams = useSearchParams();
-  const picked = searchParams.get("picked");
-  const router = useRouter();
+  const { userPicked, setComputerPicked, setStep } = useGameContext();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace(
-        `/step3?picked=${picked}&computer=${generateComputerPick()}`
-      );
+      setComputerPicked(generateComputerPick());
+      setStep(3);
     }, 500);
     return () => clearTimeout(timer);
-  }, [picked, router]);
+  }, [userPicked, setComputerPicked, setStep]);
 
   return (
     <section className="relative h-[400px] w-[600px]">
       <Header />
-      <StyledIcon type={pickedToType(picked)} location={Location.Left} />
+      <StyledIcon type={pickedToType(userPicked)} location={Location.Left} />
       <StyledIcon type={Type.null} location={Location.Right} />
     </section>
   );

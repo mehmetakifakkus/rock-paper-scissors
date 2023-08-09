@@ -1,32 +1,30 @@
-// http://localhost:3000/step3?picked=paper&computer=rock
-
 "use client";
 import React, { useEffect } from "react";
 import StyledIcon, { Location } from "../StyledIcon";
-import { useRouter, useSearchParams } from "next/navigation";
 import { pickedToType } from "./utils";
 import Header from "./Header";
+import { useGameContext } from "@/app/context/gameContext";
 
 type Props = {};
 
 export default function Step3({}: Props) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const picked = searchParams.get("picked");
-  const computer = searchParams.get("computer");
+  const { userPicked, computerPicked, setStep } = useGameContext();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace(`/step4?picked=${picked}&computer=${computer}`);
+      setStep(4);
     }, 500);
     return () => clearTimeout(timer);
-  }, [picked, computer, router]);
+  }, [userPicked, computerPicked, setStep]);
 
   return (
     <section className="relative h-[400px] w-[600px]">
       <Header />
-      <StyledIcon type={pickedToType(picked)} location={Location.Left} />
-      <StyledIcon type={pickedToType(computer)} location={Location.Right} />
+      <StyledIcon type={pickedToType(userPicked)} location={Location.Left} />
+      <StyledIcon
+        type={pickedToType(computerPicked)}
+        location={Location.Right}
+      />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { SetStateAction, createContext, useContext, useState } from "react";
+import { Type } from "../components/StyledIcon";
 
 const GameContext = createContext({
   score: 0,
@@ -10,12 +11,21 @@ const GameContext = createContext({
   resetScore: () => {},
   markCompleted: () => {},
   resetCompleted: () => {},
+  userPicked: Type.null,
+  computerPicked: Type.null,
+  setUserPicked: (value: SetStateAction<Type>) => {},
+  setComputerPicked: (value: SetStateAction<Type>) => {},
+  step: 1,
+  setStep: (value: SetStateAction<number>) => {},
 });
 
 // create a provider for score context
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [score, setScore] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [userPicked, setUserPicked] = useState<Type>(Type.null);
+  const [computerPicked, setComputerPicked] = useState<Type>(Type.null);
+  const [step, setStep] = useState(1);
 
   const incrementScore = () => {
     console.log("incrementing score");
@@ -49,6 +59,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         isCompleted,
         markCompleted,
         resetCompleted,
+        userPicked,
+        computerPicked,
+        setUserPicked,
+        setComputerPicked,
+        step,
+        setStep,
       }}
     >
       {children}

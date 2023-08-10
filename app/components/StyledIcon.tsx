@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useGameContext } from "../context/gameContext";
 
 const CONTAINER_WIDTH = 160;
@@ -37,34 +37,38 @@ const TypeMap = {
   [Type.null]: { color: "bg-gradient-radial-end" },
 };
 
-const locationMap = {
-  [Location.TopLeft]: {
-    top: `${80 - CONTAINER_WIDTH / 2}px`,
-    left: `${180 - CONTAINER_WIDTH / 2}px`,
-  },
-  [Location.TopRight]: {
-    top: `${80 - CONTAINER_WIDTH / 2}px`,
-    left: `${480 - CONTAINER_WIDTH / 2}px`,
-  },
-  [Location.BottomCenter]: {
-    top: `${320 - CONTAINER_WIDTH / 2}px`,
-    left: `${330 - CONTAINER_WIDTH / 2}px`,
-  },
-  [Location.Left]: {
-    top: `${220 - CONTAINER_WIDTH / 2}px`,
-    left: `${100 - CONTAINER_WIDTH / 2}px`,
-    transform: "scale(1.56)",
-  },
-  [Location.Right]: {
-    top: `${220 - CONTAINER_WIDTH / 2}px`,
-    left: `${480 - CONTAINER_WIDTH / 2}px`,
-    transform: "scale(1.56)",
-  },
-  [Location.RightMost]: {
-    top: `${220 - CONTAINER_WIDTH / 2}px`,
-    left: `${660 - CONTAINER_WIDTH / 2}px`,
-    transform: "scale(1.56)",
-  },
+const getLocation = (location: Location, isMobile: boolean) => {
+  const width = isMobile ? CONTAINER_WIDTH * 0.6 : CONTAINER_WIDTH;
+  const locationMap = {
+    [Location.TopLeft]: {
+      top: `${(isMobile ? 40 : 80) - width / 2}px`,
+      left: `${(isMobile ? 50 : 180) - width / 2}px`,
+    },
+    [Location.TopRight]: {
+      top: `${(isMobile ? 40 : 80) - width / 2}px`,
+      left: `${(isMobile ? 250 : 480) - width / 2}px`,
+    },
+    [Location.BottomCenter]: {
+      top: `${(isMobile ? 200 : 320) - width / 2}px`,
+      left: `${(isMobile ? 150 : 330) - width / 2}px`,
+    },
+    [Location.Left]: {
+      top: `${(isMobile ? 60 : 220) - width / 2}px`,
+      left: `${(isMobile ? 60 : 100) - width / 2}px`,
+      transform: isMobile ? "scale(1.2)" : "scale(1.52)",
+    },
+    [Location.Right]: {
+      top: `${(isMobile ? 60 : 220) - width / 2}px`,
+      left: `${(isMobile ? 240 : 480) - width / 2}px`,
+      transform: isMobile ? "scale(1.2)" : "scale(1.52)",
+    },
+    [Location.RightMost]: {
+      top: `${(isMobile ? 60 : 220) - width / 2}px`,
+      left: `${(isMobile ? 240 : 660) - width / 2}px`,
+      transform: isMobile ? "scale(1.2)" : "scale(1.52)",
+    },
+  };
+  return locationMap[location];
 };
 
 const createCircle = (x: number, y: number, radius: number) => (
@@ -89,27 +93,43 @@ export default function StyledIcon({
   selectable = false,
   state,
 }: Props) {
-  const { setUserPicked, setStep } = useGameContext();
+  const { setUserPicked, setStep, isMobile } = useGameContext();
 
   return (
     <>
-      {state === "win" && location === Location.Left && (
-        <>
-          {createCircle(120, 240, 300)} {createCircle(120, 240, 250)}
-          {createCircle(120, 240, 200)}
-        </>
-      )}
-      {state === "win" && location === Location.RightMost && (
-        <>
-          {createCircle(680, 240, 300)} {createCircle(680, 240, 250)}
-          {createCircle(680, 240, 200)}
-        </>
-      )}
+      {state === "win" &&
+        location === Location.Left &&
+        (isMobile ? (
+          <>
+            {createCircle(70, 70, 200)} {createCircle(70, 70, 160)}
+            {createCircle(70, 70, 120)}
+          </>
+        ) : (
+          <>
+            {createCircle(120, 240, 300)} {createCircle(120, 240, 250)}
+            {createCircle(120, 240, 200)}
+          </>
+        ))}
+      {state === "win" &&
+        location === Location.RightMost &&
+        (isMobile ? (
+          <>
+            {createCircle(240, 70, 200)} {createCircle(240, 70, 160)}
+            {createCircle(240, 70, 120)}
+          </>
+        ) : (
+          <>
+            {createCircle(680, 240, 300)} {createCircle(680, 240, 250)}
+            {createCircle(680, 240, 200)}
+          </>
+        ))}
       <section
         className={
-          "absolute flex items-center justify-center h-[200px] w-[200px] bg-white rounded-full " +
+          "absolute flex items-center justify-center h-[120px] w-[120px] sm:h-[200px] sm:w-[200px] bg-white rounded-full " +
           TypeMap[type].color +
-          (type === Type.null ? " " : " h-[160px] w-[160px]  border-[20px]") +
+          (type === Type.null
+            ? " "
+            : " h-[160px] w-[160px] border-[12px] sm:border-[20px]") +
           (selectable ? " cursor-pointer filter hover:saturate-200" : "") +
           (state === "lose" ? " filter grayscale" : "")
         }
@@ -118,13 +138,13 @@ export default function StyledIcon({
           setUserPicked(type);
           setStep(2);
         }}
-        style={locationMap[location]}
+        style={getLocation(location, isMobile)}
       >
         {type !== Type.null && (
           <Image
             src={`/images/icon-${type}.svg`}
-            width={IMAGE_WIDTH}
-            height={IMAGE_WIDTH}
+            width={isMobile ? IMAGE_WIDTH * 0.66 : IMAGE_WIDTH}
+            height={isMobile ? IMAGE_WIDTH * 0.66 : IMAGE_WIDTH}
             alt=""
             priority
           />

@@ -16,6 +16,7 @@ const GameContext = createContext({
   userPicked: "null",
   computerPicked: "null",
   isLoading: true,
+  isMobile: false,
   incrementScore: () => {},
   decrementScore: () => {},
   resetScore: () => {},
@@ -33,7 +34,24 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [userPicked, setUserPicked] = useState<Type>(Type.null);
   const [computerPicked, setComputerPicked] = useState<Type>(Type.null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setMobileView] = useState(false);
   const [step, setStep] = useState(1);
+  console.log(isMobile);
+
+  useEffect(() => {
+    setMobileView(window.innerWidth < 640);
+
+    const handleWindowResize = () => {
+      setMobileView(window.innerWidth < 640);
+      console.log("--", isMobile, window.innerHeight, window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (step === 4) {
@@ -77,6 +95,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         step,
         setStep,
         isLoading,
+        isMobile,
       }}
     >
       {children}

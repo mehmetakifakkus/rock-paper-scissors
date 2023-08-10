@@ -18,7 +18,7 @@ export default function Step3({}: Props) {
   }, [userPicked, computerPicked, setStep]);
 
   return (
-    <section className="relative h-[400px] w-[600px]">
+    <section className="relative h-[300px] w-[320px] sm:h-[400px] sm:w-[600px]">
       <Header />
       <StyledIcon type={pickedToType(userPicked)} location={Location.Left} />
       <StyledIcon

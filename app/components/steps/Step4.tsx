@@ -41,7 +41,7 @@ export default function Step4({}: Props) {
   }, [state]);
 
   return (
-    <section className="relative h-[400px] w-[800px]">
+    <section className="relative h-[300px] w-[320px] sm:h-[400px] sm:w-[800px]">
       <Header />
       <StyledIcon
         type={pickedToType(userPicked)}

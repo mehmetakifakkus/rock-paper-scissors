@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
         className={
           inter.className +
-          " flex py-12 px-8 min-h-screen flex-col bg-gradient-radial from-gradient-radial-start to-gradient-radial-end items-center gap-14"
+          " flex py-12 px-2 sm:px-8 min-h-screen flex-col bg-gradient-radial from-gradient-radial-start to-gradient-radial-end items-center gap-20 sm:gap-14"
         }
       >
         <GameProvider>

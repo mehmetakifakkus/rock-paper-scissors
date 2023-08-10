@@ -9,7 +9,7 @@ import { useGameContext } from "@/app/context/gameContext";
 type Props = {};
 
 export default function Step2({}: Props) {
-  const { userPicked, setComputerPicked, setStep } = useGameContext();
+  const { userPicked, setComputerPicked, setStep, isMobile } = useGameContext();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,7 +20,7 @@ export default function Step2({}: Props) {
   }, [userPicked, setComputerPicked, setStep]);
 
   return (
-    <section className="relative h-[400px] w-[600px]">
+    <section className="relative h-[300px] w-[320px] sm:h-[400px] sm:w-[600px]">
       <Header />
       <StyledIcon type={pickedToType(userPicked)} location={Location.Left} />
       <StyledIcon type={Type.null} location={Location.Right} />

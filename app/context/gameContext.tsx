@@ -36,14 +36,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setMobileView] = useState(false);
   const [step, setStep] = useState(1);
-  console.log(isMobile);
 
   useEffect(() => {
     setMobileView(window.innerWidth < 640);
 
     const handleWindowResize = () => {
       setMobileView(window.innerWidth < 640);
-      console.log("--", isMobile, window.innerHeight, window.innerWidth);
     };
 
     window.addEventListener("resize", handleWindowResize);
@@ -68,12 +66,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }, [score, step]);
 
   const incrementScore = () => {
-    console.log("incrementing score");
     setScore((prevScore) => prevScore + 1);
   };
 
   const decrementScore = () => {
-    console.log("decrementing score");
     setScore((prevScore) => prevScore - 1);
   };
 

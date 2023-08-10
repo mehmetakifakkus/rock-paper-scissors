@@ -94,7 +94,7 @@ export default function StyledIcon({
   state,
 }: Props) {
   const { setUserPicked, setStep, isMobile } = useGameContext();
-
+  console.log(isMobile);
   return (
     <>
       {state === "win" &&
@@ -128,8 +128,8 @@ export default function StyledIcon({
           "absolute flex items-center justify-center h-[120px] w-[120px] sm:h-[200px] sm:w-[200px] bg-white rounded-full " +
           TypeMap[type].color +
           (type === Type.null
-            ? " "
-            : " h-[160px] w-[160px] border-[12px] sm:border-[20px]") +
+            ? " bg-gray-400 h-[80px] w-[80px] sm:h-[120px] sm:w-[120px]"
+            : " border-[12px] sm:border-[20px]") +
           (selectable ? " cursor-pointer filter hover:saturate-200" : "") +
           (state === "lose" ? " filter grayscale" : "")
         }

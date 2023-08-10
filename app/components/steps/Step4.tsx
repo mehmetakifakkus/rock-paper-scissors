@@ -32,7 +32,6 @@ export default function Step4({}: Props) {
   const state = determineWinner();
 
   useEffect(() => {
-    console.log("--");
     if (state === "win") {
       incrementScore();
     } else if (state === "lose") {
@@ -48,7 +47,7 @@ export default function Step4({}: Props) {
         location={Location.Left}
         state={state}
       />
-      <div className="flex flex-col h-[320px] justify-center items-center">
+      <div className="flex flex-col h-[240px] sm:h-[360px] justify-center items-center">
         <h1 className="text-[44px] text-white font-barlow font-bold mb-4">
           {state === "tie" ? "TIE" : `YOU ${state.toUpperCase()}`}
         </h1>

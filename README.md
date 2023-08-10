@@ -11,7 +11,7 @@ If the player wins, they gain 1 point. If the computer wins, the player loses on
 
 ## Live Site
 
-Check out the live site [here](https://interactive-comments-rho.vercel.app/).
+Check out the live site [rock-paper-scissors.vercel.app](https://rock-paper-scissors-six-eta.vercel.app/)).
 
 ## Screenshots
 
@@ -42,7 +42,7 @@ The project is built using the following technologies:
 
 ## Installation and Usage
 
-- Clone the repository: `git clone https://github.com/mehmetakifakkus/interactive-comments.git`
+- Clone the repository: `git clone https://github.com/mehmetakifakkus/rock-paper-scissors.git`
 - Navigate to the project directory: `cd rest-api-countries`
 - Run `npm install` to install project dependencies.
 - Run `npm run dev` to start the development server.

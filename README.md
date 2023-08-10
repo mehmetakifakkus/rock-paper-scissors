@@ -43,7 +43,7 @@ The project is built using the following technologies:
 ## Installation and Usage
 
 - Clone the repository: `git clone https://github.com/mehmetakifakkus/rock-paper-scissors.git`
-- Navigate to the project directory: `cd rest-api-countries`
+- Navigate to the project directory: `cd rock-paper-scissors`
 - Run `npm install` to install project dependencies.
 - Run `npm run dev` to start the development server.
 - Open your browser and visit `http://localhost:3000` (or the specified port) to view the application.

@@ -8,12 +8,12 @@ type Props = {};
 
 export default function Step1({}: Props) {
   return (
-    <section className="relative h-[400px] w-[600px]">
+    <section className="relative h-[400px] w-[700px]">
       <Image
-        className="absolute top-[80px] left-[180px] h-[220px] w-[240px]"
+        className="absolute top-[100px] left-[190px] h-[300px] w-[320px]"
         src="/images/bg-triangle.svg"
-        width={240}
-        height={240}
+        width={320}
+        height={320}
         alt=""
       />
       <StyledIcon

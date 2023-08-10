@@ -13,8 +13,8 @@ import StringCrypto from "string-crypto";
 const GameContext = createContext({
   score: 0,
   step: 1,
-  userPicked: Type.null,
-  computerPicked: Type.null,
+  userPicked: "null",
+  computerPicked: "null",
   isLoading: true,
   incrementScore: () => {},
   decrementScore: () => {},
@@ -50,10 +50,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }, [score, step]);
 
   const incrementScore = () => {
+    console.log("incrementing score");
     setScore((prevScore) => prevScore + 1);
   };
 
   const decrementScore = () => {
+    console.log("decrementing score");
     setScore((prevScore) => prevScore - 1);
   };
 

@@ -32,17 +32,22 @@ export default function Step4({}: Props) {
   const state = determineWinner();
 
   useEffect(() => {
+    console.log("--");
     if (state === "win") {
       incrementScore();
     } else if (state === "lose") {
       decrementScore();
     }
-  }, []);
+  }, [state]);
 
   return (
     <section className="relative h-[400px] w-[800px]">
       <Header />
-      <StyledIcon type={pickedToType(userPicked)} location={Location.Left} />
+      <StyledIcon
+        type={pickedToType(userPicked)}
+        location={Location.Left}
+        state={state}
+      />
       <div className="flex flex-col h-[320px] justify-center items-center">
         <h1 className="text-[44px] text-white font-barlow font-bold mb-4">
           {state === "tie" ? "TIE" : `YOU ${state.toUpperCase()}`}
@@ -59,7 +64,7 @@ export default function Step4({}: Props) {
       <StyledIcon
         type={pickedToType(computerPicked)}
         location={Location.RightMost}
-        state={determineWinner()}
+        state={state === "win" ? "lose" : state === "lose" ? "win" : state}
       />
     </section>
   );

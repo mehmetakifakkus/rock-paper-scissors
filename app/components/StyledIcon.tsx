@@ -44,20 +44,20 @@ const locationMap = {
   },
   [Location.TopRight]: {
     top: `${80 - CONTAINER_WIDTH / 2}px`,
-    left: `${420 - CONTAINER_WIDTH / 2}px`,
+    left: `${480 - CONTAINER_WIDTH / 2}px`,
   },
   [Location.BottomCenter]: {
-    top: `${280 - CONTAINER_WIDTH / 2}px`,
-    left: `${300 - CONTAINER_WIDTH / 2}px`,
+    top: `${320 - CONTAINER_WIDTH / 2}px`,
+    left: `${330 - CONTAINER_WIDTH / 2}px`,
   },
   [Location.Left]: {
     top: `${220 - CONTAINER_WIDTH / 2}px`,
-    left: `${140 - CONTAINER_WIDTH / 2}px`,
+    left: `${100 - CONTAINER_WIDTH / 2}px`,
     transform: "scale(1.56)",
   },
   [Location.Right]: {
     top: `${220 - CONTAINER_WIDTH / 2}px`,
-    left: `${460 - CONTAINER_WIDTH / 2}px`,
+    left: `${480 - CONTAINER_WIDTH / 2}px`,
     transform: "scale(1.56)",
   },
   [Location.RightMost]: {
@@ -80,7 +80,7 @@ const createCircle = (x: number, y: number, radius: number) => (
       opacity: 0.05,
       zIndex: -1,
     }}
-  ></div>
+  />
 );
 
 export default function StyledIcon({
@@ -93,24 +93,25 @@ export default function StyledIcon({
 
   return (
     <>
-      {state === "win" && (
+      {state === "win" && location === Location.Left && (
         <>
-          {createCircle(140, 220, 300)} {createCircle(140, 220, 240)}
-          {createCircle(140, 220, 180)}
+          {createCircle(120, 240, 300)} {createCircle(120, 240, 250)}
+          {createCircle(120, 240, 200)}
         </>
       )}
-      {state === "lose" && (
+      {state === "win" && location === Location.RightMost && (
         <>
-          {createCircle(660, 220, 300)} {createCircle(660, 220, 240)}
-          {createCircle(660, 220, 180)}
+          {createCircle(680, 240, 300)} {createCircle(680, 240, 250)}
+          {createCircle(680, 240, 200)}
         </>
       )}
       <section
         className={
-          "absolute flex items-center justify-center h-[160px] w-[160px] bg-white rounded-full " +
+          "absolute flex items-center justify-center h-[200px] w-[200px] bg-white rounded-full " +
           TypeMap[type].color +
           (type === Type.null ? " " : " h-[160px] w-[160px]  border-[20px]") +
-          (selectable ? " cursor-pointer hover:bg-yellow-300" : "")
+          (selectable ? " cursor-pointer filter hover:saturate-200" : "") +
+          (state === "lose" ? " filter grayscale" : "")
         }
         onClick={() => {
           if (!selectable) return;

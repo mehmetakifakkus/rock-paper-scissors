@@ -31,10 +31,22 @@ export enum Type {
 }
 
 const TypeMap = {
-  [Type.Paper]: { color: "border-paper-end" }, // bg-gradient-to-b from-paper-start to-paper-end
-  [Type.Rock]: { color: "border-rock-start" },
-  [Type.Scissors]: { color: "border-scissors-start" },
-  [Type.null]: { color: "bg-gradient-radial-end" },
+  [Type.Paper]: {
+    color: "border-paper-end",
+    shadow: " shadow-[0px_0.4em_0px_0px_rgba(0,0,0,0.3)] ",
+  }, // bg-gradient-to-b from-paper-start to-paper-end
+  [Type.Rock]: {
+    color: "border-rock-start",
+    shadow: " shadow-[0px_0.4em_0px_0px_rgba(0,0,0,0.3)] ",
+  },
+  [Type.Scissors]: {
+    color: "border-scissors-start",
+    shadow: " shadow-[0px_0.4em_0px_0px_rgba(0,0,0,0.3)] ",
+  },
+  [Type.null]: {
+    color: "bg-gradient-radial-end",
+    shadow: " shadow-[0px_0.4em_0px_0px] shadow-radial-end ",
+  },
 };
 
 const getLocation = (location: Location, isMobile: boolean) => {
@@ -94,7 +106,7 @@ export default function StyledIcon({
   state,
 }: Props) {
   const { setUserPicked, setStep, isMobile } = useGameContext();
-  console.log(isMobile);
+
   return (
     <>
       {state === "win" &&
@@ -127,6 +139,7 @@ export default function StyledIcon({
         className={
           "absolute flex items-center justify-center h-[120px] w-[120px] sm:h-[200px] sm:w-[200px] bg-white rounded-full " +
           TypeMap[type].color +
+          TypeMap[type].shadow +
           (type === Type.null
             ? " bg-gray-400 h-[80px] w-[80px] sm:h-[120px] sm:w-[120px]"
             : " border-[12px] sm:border-[20px]") +
@@ -138,7 +151,10 @@ export default function StyledIcon({
           setUserPicked(type);
           setStep(2);
         }}
-        style={getLocation(location, isMobile)}
+        style={{
+          ...getLocation(location, isMobile),
+          // boxShadow: "hsl(349, 66%, 40%) 0px 0.4em",
+        }}
       >
         {type !== Type.null && (
           <Image

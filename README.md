@@ -55,8 +55,8 @@ The project is built using the following technologies:
   - `components`: Contains reusable React components used throughout the application.
   - `context`: It contains context used in the application. There are two context: 1) User context: stores main user that interacts with the comments section 2) Comments context which makes comments and their replies available throughout the application
   - `globals.css`: Contains Tailwind directives and custom styles for the application.
-  - `screenshots`: Includes screenshots of the application.
-  - `guide`: Includes frontendmentor.com guide files, also accessible [from](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH/hub)
+- `screenshots`: Includes screenshots of the application.
+- `guide`: Includes frontendmentor.com guide files, also accessible [from](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH/hub)
 
 ## Deployment
 
